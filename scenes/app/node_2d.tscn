@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bg5k5dh5sxw46"]
+
+[ext_resource type="PackedScene" path="res://scenes/main_menu/MainMenu.tscn" id="1_egxj5"]
+
+[node name="Node2D" type="Node2D" unique_id=1021656036]
+
+[node name="MainMenu" parent="." unique_id=1342502666 instance=ExtResource("1_egxj5")]
+grow_horizontal = 2
+grow_vertical = 2

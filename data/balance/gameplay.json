@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "base_resolution": [1080, 1920],
+  "player": {
+    "radius": 48,
+    "touch_radius": 132,
+    "max_drag_distance": 365,
+    "max_assisted_drag_distance": 620,
+    "min_launch_distance": 22,
+    "launch_multiplier": 7.25,
+    "gravity": 2100,
+    "max_speed": 3200,
+    "safe_bounds_margin": 340,
+    "soft_collision_speed": 220,
+    "hard_collision_speed": 1380
+  },
+  "stars": {
+    "three_star_extra_launches": 0,
+    "two_star_extra_launches": 2
+  },
+  "xp": {
+    "max_level": 50,
+    "base_required": 100,
+    "growth_per_level": 34,
+    "stage_clear": 35,
+    "per_star": 18,
+    "per_coin": 4
+  },
+  "rewards": {
+    "level_up_coins": 25
+  }
+}

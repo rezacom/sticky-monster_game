@@ -1,0 +1,12 @@
+[
+  {"id":1,"name_en":"Jelly Garden","name_fa":"باغ ژله‌ای","theme":"garden","color":"3fe08b","mechanics":["sticky","coin","safe_training"]},
+  {"id":2,"name_en":"Toy Factory","name_fa":"کارخانه اسباب‌بازی","theme":"factory","color":"f2b84b","mechanics":["moving","gear","spring","conveyor","door"]},
+  {"id":3,"name_en":"Ice Cave","name_fa":"غار یخی","theme":"ice","color":"7bd8ff","mechanics":["ice","low_friction","wind","falling_ice"]},
+  {"id":4,"name_en":"Hot Desert","name_fa":"کویر داغ","theme":"desert","color":"f28a40","mechanics":["sand","hot_wall","pillar","vortex","fake_exit"]},
+  {"id":5,"name_en":"Magnet Lab","name_fa":"آزمایشگاه مغناطیسی","theme":"magnet","color":"a184ff","mechanics":["magnet_pull","magnet_push","laser","switch","portal"]},
+  {"id":6,"name_en":"Night City","name_fa":"شهر شبانه","theme":"city","color":"4bb4ff","mechanics":["blinking","temporary","patrol","elevator"]},
+  {"id":7,"name_en":"Toxic Jungle","name_fa":"جنگل سمی","theme":"toxic","color":"97d936","mechanics":["toxic_gas","swing","shield","enemy"]},
+  {"id":8,"name_en":"Mechanical Castle","name_fa":"قلعه مکانیکی","theme":"castle","color":"d1a066","mechanics":["blade","timed_door","cannon","shield","multi_key"]},
+  {"id":9,"name_en":"Zero-G Space","name_fa":"فضای بی‌وزن","theme":"space","color":"7d8cff","mechanics":["low_gravity","gravity_flip","planet","black_hole","jet"]},
+  {"id":10,"name_en":"Time Rift","name_fa":"شکاف زمان","theme":"time","color":"ff79c8","mechanics":["slow_time","vanishing","shadow","moving_portal","final_mix"]}
+]

@@ -1,0 +1,14 @@
+[
+  {"id":"green","name_en":"Green Jelly","name_fa":"ژله سبز","color":"55f0a2","unlock":"default","price":0},
+  {"id":"blue","name_en":"Blue Jelly","name_fa":"ژله آبی","color":"55b8ff","unlock":"coins","price":120},
+  {"id":"red","name_en":"Red Jelly","name_fa":"ژله قرمز","color":"ff6464","unlock":"coins","price":180},
+  {"id":"gold","name_en":"Golden Jelly","name_fa":"ژله طلایی","color":"ffd65a","unlock":"stars","stars":45,"price":0},
+  {"id":"ice","name_en":"Ice Jelly","name_fa":"ژله یخی","color":"98f1ff","unlock":"world","world":3,"price":0},
+  {"id":"fire","name_en":"Fire Jelly","name_fa":"ژله آتشین","color":"ff8a3d","unlock":"world","world":4,"price":0},
+  {"id":"robot","name_en":"Robot Jelly","name_fa":"ژله رباتی","color":"b6c4d1","unlock":"level","level":10,"price":0},
+  {"id":"space","name_en":"Space Jelly","name_fa":"ژله فضایی","color":"9c88ff","unlock":"world","world":9,"price":0},
+  {"id":"ninja","name_en":"Ninja Jelly","name_fa":"ژله نینجا","color":"303640","unlock":"coins","price":300},
+  {"id":"king","name_en":"King Jelly","name_fa":"ژله پادشاه","color":"f7d365","unlock":"stars","stars":150,"price":0},
+  {"id":"shadow","name_en":"Shadow Jelly","name_fa":"ژله سایه","color":"241f33","unlock":"level","level":25,"price":0},
+  {"id":"rainbow","name_en":"Rainbow Jelly","name_fa":"ژله رنگین‌کمانی","color":"ffffff","unlock":"level","level":50,"price":0}
+]
