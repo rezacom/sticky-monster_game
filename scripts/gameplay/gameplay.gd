@@ -82,7 +82,7 @@ func _build_scene() -> void:
 	player.apply_balance(GameData.balance)
 	player.level_bounds = Rect2(Vector2.ZERO, Vector2(1080, 1920))
 	var skin: Dictionary = GameData.get_skin(String(SaveManager.data.get("selected_skin", "green")))
-	player.set_skin(GameData.color_from_hex(String(skin.get("color", "55f0a2")), Color(0.34, 0.96, 0.74)))
+	player.set_skin(GameData.color_from_hex(String(skin.get("color", "55f0a2")), Color(0.34, 0.96, 0.74)), String(skin.get("id", "green")))
 	player.reset_to(builder.get_start_position())
 	player.aim_changed.connect(_on_aim_changed)
 	player.launched.connect(_on_launched)

@@ -1,7 +1,6 @@
 extends Control
 
 var monster_time := 0.0
-var monster_color := Color(0.34, 0.96, 0.74)
 var action_buttons: Array[Dictionary] = []
 
 
@@ -33,72 +32,54 @@ func _build() -> void:
 	_clear()
 	action_buttons.clear()
 	_add_background()
-	var title := _label(LocalizationManager.tr_key("game_title"), Vector2(60, 72), Vector2(960, 118), 86, HORIZONTAL_ALIGNMENT_CENTER)
-	title.add_theme_color_override("font_color", Color(1.0, 0.93, 0.42))
+
+	var title := _label(LocalizationManager.tr_key("game_title"), Vector2(54, 48), Vector2(972, 100), 70, HORIZONTAL_ALIGNMENT_CENTER)
+	title.add_theme_color_override("font_color", Color(1.0, 0.92, 0.34))
 	title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(title)
 
-	var skin: Dictionary = GameData.get_skin(String(SaveManager.data.get("selected_skin", "green")))
-	monster_color = GameData.color_from_hex(String(skin.get("color", "55f0a2")), Color(0.34, 0.96, 0.74))
+	var map_title := _label("🛡️ قرارگاه پرتاب", Vector2(74, 170), Vector2(460, 60), 38, HORIZONTAL_ALIGNMENT_LEFT)
+	map_title.add_theme_color_override("font_color", Color(0.93, 1.0, 0.86))
+	map_title.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(map_title)
 
 	var stats_panel := PanelContainer.new()
-	stats_panel.position = Vector2(90, 510)
-	stats_panel.size = Vector2(900, 230)
+	stats_panel.position = Vector2(58, 500)
+	stats_panel.size = Vector2(964, 250)
 	stats_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(stats_panel)
-	var stats := _label(_stats_text(), Vector2.ZERO, Vector2(840, 188), 36, HORIZONTAL_ALIGNMENT_CENTER)
+
+	var stats := _label(_stats_text(), Vector2(22, 18), Vector2(900, 188), 36, HORIZONTAL_ALIGNMENT_CENTER)
 	stats.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	stats_panel.add_child(stats)
 
 	var xp_bar := ProgressBar.new()
-	xp_bar.position = Vector2(135, 768)
-	xp_bar.size = Vector2(810, 42)
+	xp_bar.position = Vector2(112, 770)
+	xp_bar.size = Vector2(856, 48)
 	xp_bar.max_value = GameData.xp_required_for_level(int(SaveManager.data.get("player_level", 1)))
 	xp_bar.value = int(SaveManager.data.get("xp", 0))
 	xp_bar.show_percentage = false
 	xp_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(xp_bar)
 
-	var y := 875.0
-	_add_button("▶  " + LocalizationManager.tr_key("continue"), Vector2(100, y), Vector2(880, 112), Callable(AppManager, "continue_game"), 42)
-	y += 135
-	_add_button("▦  " + LocalizationManager.tr_key("world_select"), Vector2(100, y), Vector2(880, 104), func() -> void: SceneManager.change_scene("res://scenes/world_select/WorldSelect.tscn"), 40)
-	y += 124
-	_add_button("●  " + LocalizationManager.tr_key("skins"), Vector2(100, y), Vector2(420, 100), func() -> void: SceneManager.change_scene("res://scenes/shop/Shop.tscn"), 38)
-	_add_button("⚙  " + LocalizationManager.tr_key("settings"), Vector2(560, y), Vector2(420, 100), func() -> void: SceneManager.change_scene("res://scenes/settings/Settings.tscn"), 38)
-	y += 120
-	_add_button("؟  " + LocalizationManager.tr_key("about"), Vector2(100, y), Vector2(880, 100), func() -> void: SceneManager.change_scene("res://scenes/about/About.tscn"), 38)
+	var command := _label("🎯 انتخاب عملیات", Vector2(80, 850), Vector2(520, 56), 38, HORIZONTAL_ALIGNMENT_LEFT)
+	command.add_theme_color_override("font_color", Color(1.0, 0.92, 0.42))
+	command.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(command)
+
+	_add_button("▶  " + LocalizationManager.tr_key("continue"), Vector2(82, 920), Vector2(916, 112), Callable(AppManager, "continue_game"), 42)
+	_add_button("🗺️  " + LocalizationManager.tr_key("world_select"), Vector2(82, 1050), Vector2(916, 108), func() -> void: SceneManager.change_scene("res://scenes/world_select/WorldSelect.tscn"), 40)
+	_add_button("🧪  " + LocalizationManager.tr_key("skins"), Vector2(82, 1180), Vector2(442, 104), func() -> void: SceneManager.change_scene("res://scenes/shop/Shop.tscn"), 38)
+	_add_button("⚙️  " + LocalizationManager.tr_key("settings"), Vector2(556, 1180), Vector2(442, 104), func() -> void: SceneManager.change_scene("res://scenes/settings/Settings.tscn"), 38)
+	_add_button("❔  " + LocalizationManager.tr_key("about"), Vector2(82, 1304), Vector2(916, 100), func() -> void: SceneManager.change_scene("res://scenes/about/About.tscn"), 36)
 
 
 func _draw() -> void:
-	var bob := sin(monster_time * 2.2) * 12.0
-	var center := Vector2(540, 350 + bob)
-	var star_colors: Array[Color] = [
-		Color(1.0, 0.72, 0.28, 0.18),
-		Color(0.42, 0.9, 1.0, 0.16),
-		Color(1.0, 0.44, 0.68, 0.16)
-	]
-	for index in range(12):
-		var x := 70 + ((index * 151) % 940)
-		var y := 210 + ((index * 227) % 1160)
-		var color: Color = star_colors[index % star_colors.size()]
-		_draw_star(Vector2(x, y), 13 + (index % 4) * 4, color)
-	draw_circle(center, 108, monster_color)
-	draw_arc(center, 108, 0, TAU, 72, monster_color.darkened(0.55), 7.0)
-	draw_circle(center + Vector2(-62, 68), 22, monster_color.lightened(0.18))
-	draw_circle(center + Vector2(62, 68), 22, monster_color.lightened(0.18))
-	var blink := fmod(monster_time, 3.8) < 0.11
-	if blink:
-		draw_line(center + Vector2(-48, -30), center + Vector2(-12, -30), Color(0.04, 0.08, 0.09), 6.0)
-		draw_line(center + Vector2(12, -30), center + Vector2(48, -30), Color(0.04, 0.08, 0.09), 6.0)
-	else:
-		draw_circle(center + Vector2(-30, -30), 13, Color(0.04, 0.08, 0.09))
-		draw_circle(center + Vector2(30, -30), 13, Color(0.04, 0.08, 0.09))
-	draw_arc(center + Vector2(0, 12), 34, 0.15, PI - 0.15, 28, Color(0.04, 0.08, 0.09), 6.0)
+	_draw_strategy_map()
 
 
 func _stats_text() -> String:
-	return "⬆ %s %d     ★ %s %d\n● %s %d     ٪ %s %.0f" % [
+	return "⬆ %s %d     ⭐ %s %d\n🟡 %s %d     📊 %s %.0f%%" % [
 		LocalizationManager.tr_key("player_level"),
 		int(SaveManager.data.get("player_level", 1)),
 		LocalizationManager.tr_key("stars"),
@@ -113,16 +94,45 @@ func _stats_text() -> String:
 func _add_background() -> void:
 	var bg := ColorRect.new()
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
-	bg.color = Color(0.07, 0.16, 0.16)
+	bg.color = Color(0.025, 0.018, 0.12)
 	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	bg.show_behind_parent = true
 	add_child(bg)
 
 	var top := ColorRect.new()
 	top.position = Vector2(0, 0)
-	top.size = Vector2(1080, 420)
-	top.color = Color(0.15, 0.55, 0.5)
+	top.size = Vector2(1080, 455)
+	top.color = Color(0.18, 0.05, 0.36)
 	top.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	top.show_behind_parent = true
 	add_child(top)
+
+
+func _draw_strategy_map() -> void:
+	for index in range(13):
+		var y := 164 + index * 102
+		draw_line(Vector2(44, y), Vector2(1036, y - 60), Color(0.46, 0.14, 0.86, 0.36), 2.0)
+	for index in range(8):
+		var x := 90 + index * 136
+		draw_line(Vector2(x, 150), Vector2(x - 90, 1470), Color(0.18, 0.38, 1.0, 0.22), 2.0)
+
+	var nodes := [
+		Vector2(112, 276),
+		Vector2(280, 340),
+		Vector2(428, 280),
+		Vector2(576, 370),
+		Vector2(752, 314)
+	]
+	for index in range(nodes.size() - 1):
+		draw_line(nodes[index], nodes[index + 1], Color(1.0, 0.82, 0.28, 0.72), 8.0)
+	for index in range(nodes.size()):
+		var color: Color = Color(0.88, 0.12, 0.9) if index < 3 else Color(1.0, 0.68, 0.12)
+		var pulse: float = sin(monster_time * 2.8 + float(index)) * 2.0
+		draw_circle(nodes[index], 23.0 + pulse, color)
+		draw_arc(nodes[index], 27.0 + pulse, 0.0, TAU, 32, Color(1, 1, 1, 0.65), 4.0)
+
+	draw_rect(Rect2(Vector2(58, 842), Vector2(964, 592)), Color(0.04, 0.025, 0.12, 0.66), true)
+	draw_rect(Rect2(Vector2(58, 842), Vector2(964, 592)), Color(0.92, 0.14, 0.92, 0.34), false, 4.0)
 
 
 func _add_button(text: String, pos: Vector2, size: Vector2, callback: Callable, font_size: int = 36) -> void:
@@ -164,15 +174,6 @@ func _label(text: String, pos: Vector2, size: Vector2, font_size: int, align: Ho
 func _clear() -> void:
 	for child in get_children():
 		child.queue_free()
-
-
-func _draw_star(center: Vector2, radius: float, color: Color) -> void:
-	var points := PackedVector2Array()
-	for i in range(10):
-		var r := radius if i % 2 == 0 else radius * 0.48
-		var angle := -PI * 0.5 + float(i) * PI / 5.0
-		points.append(center + Vector2(cos(angle), sin(angle)) * r)
-	draw_colored_polygon(points, color)
 
 
 func handle_pointer_release(position: Vector2) -> bool:

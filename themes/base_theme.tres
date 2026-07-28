@@ -1,9 +1,9 @@
 [gd_resource type="Theme" load_steps=8 format=3]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
-bg_color = Color(0.14, 0.72, 0.58, 1)
+bg_color = Color(0.66, 0.12, 0.9, 1)
 border_width_bottom = 6
-border_color = Color(0.07, 0.42, 0.36, 1)
+border_color = Color(0.42, 0.08, 0.58, 1)
 corner_radius_top_left = 28
 corner_radius_top_right = 28
 corner_radius_bottom_right = 28
@@ -14,9 +14,9 @@ content_margin_right = 22.0
 content_margin_bottom = 12.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
-bg_color = Color(0.22, 0.84, 0.66, 1)
+bg_color = Color(0.9, 0.18, 0.86, 1)
 border_width_bottom = 6
-border_color = Color(0.08, 0.46, 0.39, 1)
+border_color = Color(1, 0.76, 0.16, 1)
 corner_radius_top_left = 28
 corner_radius_top_right = 28
 corner_radius_bottom_right = 28
@@ -27,9 +27,9 @@ content_margin_right = 22.0
 content_margin_bottom = 12.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
-bg_color = Color(0.1, 0.58, 0.5, 1)
+bg_color = Color(0.48, 0.09, 0.78, 1)
 border_width_top = 4
-border_color = Color(0.05, 0.32, 0.29, 1)
+border_color = Color(0.22, 0.04, 0.46, 1)
 corner_radius_top_left = 28
 corner_radius_top_right = 28
 corner_radius_bottom_right = 28
@@ -40,21 +40,21 @@ content_margin_right = 22.0
 content_margin_bottom = 12.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_disabled"]
-bg_color = Color(0.31, 0.38, 0.4, 1)
+bg_color = Color(0.25, 0.2, 0.34, 1)
 border_width_bottom = 5
-border_color = Color(0.18, 0.23, 0.25, 1)
+border_color = Color(0.14, 0.1, 0.22, 1)
 corner_radius_top_left = 28
 corner_radius_top_right = 28
 corner_radius_bottom_right = 28
 corner_radius_bottom_left = 28
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-bg_color = Color(0.08, 0.16, 0.16, 0.9)
+bg_color = Color(0.08, 0.04, 0.18, 0.92)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 6
-border_color = Color(0.35, 0.96, 0.72, 0.8)
+border_color = Color(0.92, 0.16, 0.92, 0.82)
 corner_radius_top_left = 26
 corner_radius_top_right = 26
 corner_radius_bottom_right = 26
@@ -65,14 +65,14 @@ content_margin_right = 24.0
 content_margin_bottom = 24.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_progress_bg"]
-bg_color = Color(0.05, 0.1, 0.11, 1)
+bg_color = Color(0.05, 0.03, 0.12, 1)
 corner_radius_top_left = 18
 corner_radius_top_right = 18
 corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_progress_fill"]
-bg_color = Color(1, 0.78, 0.22, 1)
+bg_color = Color(1, 0.7, 0.12, 1)
 corner_radius_top_left = 18
 corner_radius_top_right = 18
 corner_radius_bottom_right = 18
@@ -80,7 +80,7 @@ corner_radius_bottom_left = 18
 
 [resource]
 default_font_size = 34
-Button/colors/font_color = Color(0.98, 1, 0.94, 1)
+Button/colors/font_color = Color(1, 0.96, 0.88, 1)
 Button/colors/font_hover_color = Color(1, 1, 1, 1)
 Button/colors/font_pressed_color = Color(0.92, 1, 0.92, 1)
 Button/colors/font_disabled_color = Color(0.64, 0.69, 0.69, 1)
