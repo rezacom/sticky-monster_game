@@ -47,6 +47,7 @@ func _build() -> void:
 		)
 		list.add_child(button)
 	_add_back()
+	LocalizationManager.apply_direction(self)
 
 
 func _draw() -> void:

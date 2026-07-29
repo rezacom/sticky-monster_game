@@ -47,6 +47,7 @@ func change_scene(path: String, args: Dictionary = {}, add_history: bool = true)
 	current_args = args.duplicate(true)
 	if current_scene.has_method("setup"):
 		current_scene.call("setup", args)
+	LocalizationManager.apply_direction(current_scene)
 	changing = false
 
 

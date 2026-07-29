@@ -45,6 +45,6 @@
   "out_of_launches": "No launches left",
   "dead": "Monster got hurt",
   "exit_reached": "Exit reached",
-  "about_text": "An offline 2D slingshot puzzle game made with Godot and GDScript. No ads, no server, no internet required.",
+  "about_text": "Jelly Dragon is an offline 2D level-based puzzle game about planning, timing, and careful launches. Drag the jelly dragon, read the trajectory and power, then release to reach the exit. Sticky walls, hazards, collectible stars, moving obstacles, and moving goals turn each stage into a small strategy puzzle. It is designed for kids: colorful, easy to start, and gradually more challenging. No ads, no server, no internet required.",
   "tutorial_1": "Drag from the monster, then release."
 }

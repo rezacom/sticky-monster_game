@@ -12,6 +12,7 @@ func _ready() -> void:
 	if result.is_empty():
 		result = AppManager.last_result
 	_build()
+	LocalizationManager.apply_direction(self)
 
 
 func _build() -> void:

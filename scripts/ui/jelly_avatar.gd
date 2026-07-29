@@ -33,7 +33,7 @@ func _draw_body(center: Vector2, radius: float) -> void:
 	for index in range(56):
 		var angle: float = float(index) / 56.0 * TAU
 		var wobble: float = sin(angle * 5.0 + pulse * 5.0) * 3.0 + sin(angle * 3.0 - pulse * 3.2) * 1.6
-		var r: float = radius + wobble
+		var r: float = (radius + wobble) * _shape_scale(angle)
 		points.append(center + Vector2(cos(angle), sin(angle)) * r)
 	var outline_points: PackedVector2Array = points.duplicate()
 	outline_points.append(points[0])
@@ -79,6 +79,31 @@ func _draw_skin_badge(center: Vector2, radius: float) -> void:
 		var rainbow_colors: Array[Color] = [Color(1.0, 0.22, 0.22), Color(1.0, 0.84, 0.18), Color(0.24, 0.78, 0.34), Color(0.32, 0.58, 1.0)]
 		for index in range(4):
 			draw_arc(center + Vector2(0, -radius * 0.78), radius * (0.42 + index * 0.08), PI, TAU, 20, rainbow_colors[index], 4.0)
+
+
+func _shape_scale(angle: float) -> float:
+	if skin_id == "red":
+		return 1.0 + cos(angle * 3.0 - PI * 0.5) * 0.16
+	if skin_id == "robot":
+		var square_radius: float = 0.9 / max(0.72, max(abs(cos(angle)), abs(sin(angle))))
+		return lerpf(1.0, square_radius, 0.42)
+	if skin_id == "ninja":
+		return 1.0 + cos(angle * 4.0) * 0.13
+	if skin_id == "ice":
+		return 1.0 + cos(angle * 6.0) * 0.08
+	if skin_id == "fire":
+		return 1.0 + max(0.0, -sin(angle)) * 0.22 + sin(angle * 3.0) * 0.05
+	if skin_id == "king":
+		return 1.0 + max(0.0, sin(angle)) * 0.12 - max(0.0, -sin(angle)) * 0.06
+	if skin_id == "space":
+		return 1.0 + cos(angle * 2.0) * 0.12
+	if skin_id == "shadow":
+		return 1.0 + sin(angle * 5.0 + pulse * 1.7) * 0.09
+	if skin_id == "rainbow":
+		return 1.0 + sin(angle * 8.0) * 0.06
+	if skin_id == "blue":
+		return 1.0 + max(0.0, -sin(angle)) * 0.12
+	return 1.0
 
 
 func _draw_flame(center: Vector2, radius: float) -> void:

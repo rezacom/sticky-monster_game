@@ -23,6 +23,7 @@ var level_bounds := Rect2(Vector2.ZERO, Vector2(1080.0, 1920.0))
 var external_acceleration := Vector2.ZERO
 var skin_color := Color(0.34, 0.96, 0.74, 0.96)
 var skin_id := "green"
+var input_enabled := true
 
 var motion_state := MotionState.IDLE
 var active_touch_index := -1000
@@ -85,6 +86,7 @@ func reset_to(world_position: Vector2) -> void:
 	gravity_override = -1.0
 	external_acceleration = Vector2.ZERO
 	stick_normal = Vector2.ZERO
+	input_enabled = true
 	face_mood = "idle"
 	_set_state(MotionState.IDLE)
 	emit_signal("aim_changed", false, global_position, Vector2.ZERO, 0.0)
@@ -98,6 +100,7 @@ func celebrate() -> void:
 	assist_touch_index = -1000
 	face_mood = "happy"
 	stick_normal = Vector2.ZERO
+	input_enabled = false
 	_set_state(MotionState.CELEBRATING)
 	emit_signal("aim_changed", false, global_position, Vector2.ZERO, 0.0)
 	queue_redraw()
@@ -107,13 +110,14 @@ func die() -> void:
 	velocity = Vector2.ZERO
 	face_mood = "hurt"
 	stick_normal = Vector2.ZERO
+	input_enabled = false
 	_set_state(MotionState.DEAD)
 	emit_signal("aim_changed", false, global_position, Vector2.ZERO, 0.0)
 	queue_redraw()
 
 
 func can_aim() -> bool:
-	return motion_state == MotionState.IDLE or motion_state == MotionState.STICKING
+	return input_enabled and (motion_state == MotionState.IDLE or motion_state == MotionState.STICKING)
 
 
 func _input(event: InputEvent) -> void:
@@ -365,7 +369,7 @@ func _draw_jelly_body(center: Vector2, body_radius: float, fill: Color, outline:
 		var angle: float = float(index) / 64.0 * TAU
 		var direction := Vector2(cos(angle), sin(angle))
 		var wave: float = sin(angle * 5.0 + jelly_time * 7.0) * amp + sin(angle * 3.0 - jelly_time * 4.0) * amp * 0.35
-		var r: float = body_radius + wave
+		var r: float = (body_radius + wave) * _shape_scale(angle)
 		var point: Vector2 = center + direction * r
 		if stuck:
 			var contact_amount: float = clampf(direction.dot(contact_direction), 0.0, 1.0)
@@ -409,3 +413,28 @@ func _draw_skin_features(outline: Color) -> void:
 	elif skin_id == "rainbow":
 		draw_arc(Vector2(0, -54), 22.0, PI, TAU, 18, Color(1.0, 0.28, 0.28), 3.0)
 		draw_arc(Vector2(0, -54), 27.0, PI, TAU, 18, Color(0.28, 0.82, 1.0), 3.0)
+
+
+func _shape_scale(angle: float) -> float:
+	if skin_id == "red":
+		return 1.0 + cos(angle * 3.0 - PI * 0.5) * 0.16
+	if skin_id == "robot":
+		var square_radius: float = 0.9 / max(0.72, max(abs(cos(angle)), abs(sin(angle))))
+		return lerpf(1.0, square_radius, 0.42)
+	if skin_id == "ninja":
+		return 1.0 + cos(angle * 4.0) * 0.13
+	if skin_id == "ice":
+		return 1.0 + cos(angle * 6.0) * 0.08
+	if skin_id == "fire":
+		return 1.0 + max(0.0, -sin(angle)) * 0.22 + sin(angle * 3.0) * 0.05
+	if skin_id == "king":
+		return 1.0 + max(0.0, sin(angle)) * 0.12 - max(0.0, -sin(angle)) * 0.06
+	if skin_id == "space":
+		return 1.0 + cos(angle * 2.0) * 0.12
+	if skin_id == "shadow":
+		return 1.0 + sin(angle * 5.0 + jelly_time * 1.7) * 0.09
+	if skin_id == "rainbow":
+		return 1.0 + sin(angle * 8.0) * 0.06
+	if skin_id == "blue":
+		return 1.0 + max(0.0, -sin(angle)) * 0.12
+	return 1.0

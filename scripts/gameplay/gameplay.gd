@@ -15,6 +15,7 @@ var launches_used := 0
 var collected_coins: Array = []
 var level_finished := false
 var paused := false
+var out_of_launches_pending := false
 
 var launches_label: Label
 var coins_label: Label
@@ -89,6 +90,7 @@ func _build_scene() -> void:
 	player.fell_out.connect(_on_fell_out)
 	player.hard_hit.connect(_on_hard_hit)
 	player.died.connect(_on_player_died)
+	player.state_changed.connect(_on_player_state_changed)
 
 	_build_hud()
 	_update_hud("Ready")
@@ -197,8 +199,10 @@ func _on_aim_changed(active: bool, origin: Vector2, velocity: Vector2, power: fl
 func _on_launched() -> void:
 	launches_used += 1
 	_update_hud("Flying")
-	if launches_used > int(level_data.get("max_launches", 5)):
-		_fail(LocalizationManager.tr_key("out_of_launches"))
+	var max_launches: int = int(level_data.get("max_launches", 5))
+	if launches_used >= max_launches:
+		out_of_launches_pending = true
+		player.input_enabled = false
 
 
 func _on_coin_collected(index: int) -> void:
@@ -228,6 +232,13 @@ func _on_player_died() -> void:
 	_fail(LocalizationManager.tr_key("dead"))
 
 
+func _on_player_state_changed(state: String) -> void:
+	if level_finished or not out_of_launches_pending:
+		return
+	if state == "IDLE" or state == "STICKING":
+		_fail(LocalizationManager.tr_key("out_of_launches"))
+
+
 func _on_fell_out() -> void:
 	_fail(LocalizationManager.tr_key("dead"))
 
@@ -245,6 +256,8 @@ func _fail(reason: String) -> void:
 	if level_finished:
 		return
 	level_finished = true
+	if player != null:
+		player.input_enabled = false
 	preview.clear()
 	AppManager.fail_current_level(reason)
 

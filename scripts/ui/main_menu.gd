@@ -62,7 +62,7 @@ func _build() -> void:
 	xp_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(xp_bar)
 
-	var command := _label("🎯 انتخاب عملیات", Vector2(80, 850), Vector2(520, 56), 38, HORIZONTAL_ALIGNMENT_LEFT)
+	var command := _label("", Vector2(0, 850), Vector2(520, 56), 38, HORIZONTAL_ALIGNMENT_LEFT)
 	command.add_theme_color_override("font_color", Color(1.0, 0.92, 0.42))
 	command.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(command)
@@ -72,6 +72,7 @@ func _build() -> void:
 	_add_button("🧪  " + LocalizationManager.tr_key("skins"), Vector2(82, 1180), Vector2(442, 104), func() -> void: SceneManager.change_scene("res://scenes/shop/Shop.tscn"), 38)
 	_add_button("⚙️  " + LocalizationManager.tr_key("settings"), Vector2(556, 1180), Vector2(442, 104), func() -> void: SceneManager.change_scene("res://scenes/settings/Settings.tscn"), 38)
 	_add_button("❔  " + LocalizationManager.tr_key("about"), Vector2(82, 1304), Vector2(916, 100), func() -> void: SceneManager.change_scene("res://scenes/about/About.tscn"), 36)
+	LocalizationManager.apply_direction(self)
 
 
 func _draw() -> void:

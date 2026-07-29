@@ -72,3 +72,4 @@ func _build() -> void:
 			AppManager.start_level(id)
 		)
 		grid.add_child(button)
+	LocalizationManager.apply_direction(self)

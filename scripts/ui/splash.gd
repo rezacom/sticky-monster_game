@@ -34,3 +34,4 @@ func _build() -> void:
 	title.add_theme_font_size_override("font_size", 76)
 	title.add_theme_color_override("font_color", Color(1.0, 0.88, 0.36))
 	add_child(title)
+	LocalizationManager.apply_direction(self)

@@ -75,6 +75,7 @@ func _build() -> void:
 			_build()
 		)
 		grid.add_child(button)
+	LocalizationManager.apply_direction(self)
 
 
 func _draw() -> void:
